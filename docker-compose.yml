@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./notes_project
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./notes_project:/app
+    environment:
+      - DEBUG=True
+    networks:
+      - notes-network
+
+  frontend:
+    build:
+      context: ./notes-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8000
+    networks:
+      - notes-network
+
+networks:
+  notes-network:
+    driver: bridge
