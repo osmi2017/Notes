@@ -53,8 +53,16 @@ const Sidebar = ({ toggleSidebar, isNoteSaved, onEditNote }) => {
   }, [isNoteSaved, toggleSidebar]); // Add isNoteSaved to the dependency array
 
   const processAudioFile = (audioPath) => {
-    return audioPath.replace('/media/home/soro/Documents/notes_project', 'http://localhost:8000');
+    // Regex to match any path containing 'notes_project' and remove it
+    const regex = /\/.*notes_project.*(\/media\/.*)/;
+    
+    // Perform the replacement to keep only the '/media/audio_files/blob' part
+    const processedPath = audioPath.replace(regex, '$1');
+  
+    // Add 'localhost:8000' in front to create a full URL
+    return `http://localhost:8000${processedPath}`;
   };
+  
 
   const deleteAudioFile = async (noteId) => {
     const token = localStorage.getItem('token');

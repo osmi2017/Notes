@@ -9,8 +9,11 @@ from .models import Note
 from .serializers import NoteSerializer, UserCreateSerializer
 from rest_framework.views import APIView
 from rest_framework import status
+from pydub import AudioSegment
+from django.core.files.storage import default_storage
+from datetime import datetime
 
-
+current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 class UserCreateView(APIView):
     def post(self, request):
         serializer = UserCreateSerializer(data=request.data)
@@ -37,20 +40,25 @@ class NoteViewSet(ModelViewSet):
         audio_file = self.request.FILES.get('audio_file')  # Extract audio file from request
 
         if audio_file:
-            # Define the path where the file will be saved
+            # Define the path where the original file will be saved
             audio_dir = os.path.join(settings.MEDIA_ROOT, 'audio_files')
-            file_path = os.path.join(audio_dir, audio_file.name)
+            original_file_path = os.path.join(audio_dir,  f"{current_time}.mp3")
 
             # Create the directory if it doesn't exist
             os.makedirs(audio_dir, exist_ok=True)
 
-            # Save the file to the specified path
-            with default_storage.open(file_path, 'wb+') as destination:
+            # Save the original file to the specified path
+            with default_storage.open(original_file_path, 'wb+') as destination:
                 for chunk in audio_file.chunks():
                     destination.write(chunk)
 
+            # Convert the audio file to MP3 format
+            mp3_file_path = os.path.splitext(original_file_path)[0] + '.mp3'
+            audio = AudioSegment.from_file(original_file_path)  # Load the original audio file
+            audio.export(mp3_file_path, format='mp3')  # Export as MP3
+
             # Save the serializer with the associated audio file path
-            serializer.save(user=self.request.user, audio_file=file_path)
+            serializer.save(user=self.request.user, audio_file=mp3_file_path)
         else:
             # Save the note without an audio file
             serializer.save(user=self.request.user)

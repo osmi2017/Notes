@@ -4,4 +4,5 @@ djangorestframework-simplejwt
 psycopg2-binary
 django-cors-headers
 pytest 
+pydub
 
