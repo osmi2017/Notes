@@ -1,3 +1,9 @@
+you can watch a demonstration video here:
+
+https://www.youtube.com/watch?v=MsBllYu1III
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 Notes Frontend
 Notes Frontend is a web app built with React that allows users to create, manage, and delete notes, including attaching audio files to them. It integrates with a backend API for user authentication and note management.
 
