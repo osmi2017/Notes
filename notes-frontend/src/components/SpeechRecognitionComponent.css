@@ -1,0 +1,46 @@
+
+  .speechReconContainer {
+    text-align: center; /* Center text */
+    position: absolute;
+    top: 300%;
+    width: 100%; /* Full width */
+  max-width: 800px; /* Optional: set a max width for the container */
+  margin: 0 auto; /* Center the container */
+  }
+  
+  .mic-button {
+    background-color: #4CAF50; /* Green background */
+    border: none;
+    border-radius: 50%; /* Circular button */
+    color: white; /* White icon */
+    width: 100px; /* Increased width of the button */
+    height: 100px; /* Increased height of the button */
+    font-size: 36px; /* Increased size of the icon */
+   
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+  
+  .mic-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .mic-button.listening {
+    background-color: #f44336; /* Red background when listening */
+    pointer-events: none; /* Disable clicking */
+    opacity: 0.6; /* Optional: Reduce opacity to indicate it's disabled */
+  }
+  
+  
+  .transcript-text {
+    font-size: 24px; /* Increased size of the transcript text */
+    margin-top: 20px; /* Space between button and text */
+    max-width: 800px; /* Set a maximum width for the text container */
+    word-wrap: break-word; /* Allow long words to break and wrap to the next line */
+    overflow-wrap: break-word; /* Ensure compatibility with different browsers */
+    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+    justify-content: center; 
+    left:50%;
+  }

@@ -1,0 +1,22 @@
+/* In your CSS file or inside a <style> tag */
+.sidebar {
+    position: fixed;
+    top: 10cm;
+    left: 0;
+    height: 100%;
+    width: 16rem; /* Equivalent to 64 in Tailwind's w-64 */
+    background-color: #2d3748; /* Tailwind's bg-gray-800 */
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+    z-index: 9999; /* Ensure it comes to the front */
+  }
+  
+  .sidebar.open {
+    transform: translateX(0); /* Visible */
+  }
+  
+  .sidebar.closed {
+    transform: translateX(-100%); /* Hidden */
+  }
+  
